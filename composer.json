@@ -1,5 +1,5 @@
 {
-	"name": "philippfrenzel/yii2fullcalendar",
+	"name": "zertex/yii2fullcalendar",
 	"description": "Yii2 fullcalendar Widgets",
 	"keywords": ["yii2", "fullcalendar","widget"],
 	"homepage": "http://www.frenzel.net/",
@@ -7,14 +7,14 @@
 	"license": "MIT",
 	"authors": [
 		{
-			"name": "Philipp Frenzel",
+			"name": "Philipp Frenzel - Zertex Edition",
 			"email": "philipp@frenzel.net",
 			"homepage": "http://www.frenzel.net/",
 			"role": "Developer"
 		}
 	],
 	"support": {
-		"source": "https://github.com/philippfrenzel/yii2fullcalendar"
+		"source": "https://github.com/zertex/yii2fullcalendar"
 	},
 	"minimum-stability": "stable",
 	"require": {
