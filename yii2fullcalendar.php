@@ -47,7 +47,6 @@ class yii2fullcalendar extends elWidget
     public $clientOptions = [
         'weekends' => true,
         'editable' => false,
-        'aspectRatio' => 1.35
     ];
 
     /**
@@ -61,12 +60,6 @@ class yii2fullcalendar extends elWidget
     * @todo add the event class and write docs
     **/
     public $events = [];
-
-    /**
-     * Add custom buttons to the calendar header
-     * @var array customButtons
-     */
-    public $customButtons = [];
 
     /**
      * Define the look n feel for the calendar header, known placeholders are left, center, right
@@ -114,12 +107,6 @@ class yii2fullcalendar extends elWidget
      * @var string
      */
     private $_pluginName = 'fullCalendar';
-	
-     /**
-     * The javascript function to us as en onLoading callback
-     * @var string the javascript code that implements the onLoading function
-     */
-    public $onLoading = "";
 
     /**
      * The javascript function to us as en eventRender callback
@@ -158,12 +145,6 @@ class yii2fullcalendar extends elWidget
      * @var string the javascript code that implements the eventClick function
      */
     public $eventClick = "";
-
-    /**
-     * A js callback that triggered when the user clicks an day.
-     * @var string the javascript code that implements the dayClick function
-     */
-    public $dayClick = "";
 
     /**
      * A js callback that will fire after a selection is made.
@@ -224,11 +205,6 @@ class yii2fullcalendar extends elWidget
         {
             ThemeAsset::register($view);
         }
-	
-	if (array_key_exists('defaultView',$this->clientOptions) && ($this->clientOptions['defaultView'] == 'timelineDay' || $this->clientOptions['defaultView'] == 'timelineWeek' || $this->clientOptions['defaultView'] == 'timelineMonth' || $this->clientOptions['defaultView'] == 'agendaDay'))
-        {
-            SchedulerAsset::register($view);
-        }    
 
         if (isset($this->options['lang']))
         {
@@ -249,11 +225,6 @@ class yii2fullcalendar extends elWidget
 	if(!is_null($this->contentHeight) && !isset($this->clientOptions['contentHeight']))
         {
             $this->clientOptions['contentHeight'] = $this->contentHeight;
-        }
-
-        if(isset($this->customButtons) && !isset($this->clientOptions['customButtons']))
-        {
-            $this->clientOptions['customButtons'] = $this->customButtons;
         }
 
         if(is_array($this->header) && isset($this->clientOptions['header']))
@@ -301,13 +272,9 @@ class yii2fullcalendar extends elWidget
     {
         $id = $this->options['id'];
       
-	if ($this->onLoading)
-            $options['loading'] = new JsExpression($this->onLoading);
-        else {
-	    $options['loading'] = new JsExpression("function(isLoading, view ) {
+        $options['loading'] = new JsExpression("function(isLoading, view ) {
                 jQuery('#{$id}').find('.fc-loading').toggle(isLoading);
-	    }");
-	}
+        }");
                                                
         //add new theme information for the calendar                                       
 		$options['themeSystem'] = $this->themeSystem;
@@ -336,9 +303,6 @@ class yii2fullcalendar extends elWidget
                                                
         if ($this->eventClick){
             $options['eventClick'] = new JsExpression($this->eventClick);
-        }
-        if ($this->dayClick){
-            $options['dayClick'] = new JsExpression($this->dayClick);
         }
 
         if (is_array($this->events) || is_string($this->events)){
